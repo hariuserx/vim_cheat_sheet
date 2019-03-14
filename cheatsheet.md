@@ -1,6 +1,12 @@
 ### Vim Complete Reference
 visit [official page](http://vimdoc.sourceforge.net/htmldoc/)
 
+### Vim Help
+VIM offers extensive converage of help documentation. Access it with
+`:help <anything thing. Need no be just a vim command>`
+
+`:help help` Get help on using help :)
+
 ### Vim interpreter
 Start Vim `vim`. Press `:` and then you have access to Vim interpreter
 
@@ -94,10 +100,22 @@ set noundofile
 ```
 
 #### VIM Modes
-Normal : press <ESC> key, default mode
-Insert Mode: press "i"
-Visual Mode: press "v"
+> Normal : press `<ESC>` key, default mode<br>
+> Insert Mode: press "i"<br>
+> Visual Mode: press "v"<br>
 
+#### Locating you VIM installation directory, vimrc
+`:echo $MYVIMRC`  -> vimrc file in use
+`:echo $VIMRUNTIME`  ->  vim run time
+
+#### List all loaded vim scripts
+`:scriptnames`
+
+#### Seeing recent messages
+`:messages`
+Here we can see all the messages history.<br>
+While writing vim plugins and editing vimrrc, I find it very useful to output some debug statements.<br>
+Using conventional `echo` won't save the messages for future use. Use `echom` for such purposes.
 
 #### Custom VIM key mappings
 See `:help map` for more info, Mostly we will need, visual, insert and normal mode mappings
@@ -117,3 +135,14 @@ nnoremap <leader>cw viwy
 " Paste in the current word under cursor
 nnoremap <leader>pw viwpviwy
 ```
+
+#### Vim Abbrevations
+Extemely useful while typing long names
+`:iabbrev chc chocolate`
+In insert mode when ever we type chc followed by space, vim automatically replaces _chc_ with _chocolate_<br>
+Note the chc must be a separate word. _achc_ won't get replaced with _achocolate_.
+
+#### Vim auto complete
+In insert mode press: `Ctrl + n`
+Goes over all the words in all open buffers and list downs all near matches
+

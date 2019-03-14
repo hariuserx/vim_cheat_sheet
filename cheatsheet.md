@@ -1,5 +1,5 @@
 ### Vim Complete Reference
-visit (official)[http://vimdoc.sourceforge.net/htmldoc/]
+visit [official page](http://vimdoc.sourceforge.net/htmldoc/)
 
 ### Vim interpreter
 Start Vim `vim`. Press `:` and then you have access to Vim interpreter
@@ -48,7 +48,7 @@ See `help expr4`
 `:qa` -> Quit all windows
 `:qa!`	-> Quit all windows ignoring changes
 
-### Write
+#### Write
 All the Exit commands with `q` replaced by `w`
 
 #### Tabs

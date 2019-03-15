@@ -1,5 +1,4 @@
-### Vim Complete Reference
-visit [official page](http://vimdoc.sourceforge.net/htmldoc/)
+**For Vim Complete Reference:** visit [official page](http://vimdoc.sourceforge.net/htmldoc/)
 
 ### Vim Help
 VIM offers extensive converage of help documentation. Access it with
@@ -145,4 +144,10 @@ Note the chc must be a separate word. _achc_ won't get replaced with _achocolate
 #### Vim auto complete
 In insert mode press: `Ctrl + n`
 Goes over all the words in all open buffers and list downs all near matches
+
+#### Go to Other end of bracket
+press `%` while on bracket in normal mode
+
+#### Go to next/previous occurence
+press `n` and `N` to go to next and previous occurence respectively of the search query in normal mode.
 

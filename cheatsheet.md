@@ -1,7 +1,7 @@
 **For Vim Complete Reference:** visit [official page](http://vimdoc.sourceforge.net/htmldoc/)
 
 ### Vim Help
-VIM offers extensive converage of help documentation. Access it with
+VIM offers extensive coverage of help documentation. Access it with
 `:help <anything thing. Need no be just a vim command>`
 
 `:help help` Get help on using help :)
@@ -15,7 +15,7 @@ Start Vim `vim`. Press `:` and then you have access to Vim interpreter
 
 `:` -> `let a = 10 <Enter>` -> `let b = 20 <Enter>` -> `echo a + b` 
 
-__Note:__ If we start vim using `vim` everytime we execute a command using `:` we have to re-enter `:` to execute the next command, to avoid that and to use a vim instance just completely in execution mode, launch vim with `vim -E` or `vim -e`. Check out `help -e` and `help Ex-mode` for more info
+__Note:__ If we start vim using `vim` every time we execute a command using `:` we have to re-enter `:` to execute the next command, to avoid that and to use a vim instance just completely in execution mode, launch vim with `vim -E` or `vim -e`. Check out `help -e` and `help Ex-mode` for more info
 
 `vim -E` is really helpful while testing small snippets
 
@@ -37,9 +37,9 @@ This is done by `echo`. Use `echom` in case you want to save the messages in mes
 Often we can to convert int/float/list and others to string. Use `string()` for this purpose
 
 ### Folding
-When the code gets huge, you might want to fold using {Visual}`zf`. Select a visual block and press `zf`. Use `set foldcolumn=1` to display a column which lists the folds. You can set it to a higher value to make multi level folds more intutive. Folds can be opened and closed using `zo` and `zc` respectively.
+When the code gets huge, you might want to fold using {Visual}`zf`. Select a visual block and press `zf`. Use `set foldcolumn=1` to display a column which lists the folds. You can set it to a higher value to make multi level folds more intuitive. Folds can be opened and closed using `zo` and `zc` respectively.
 
-### Comparisions
+### Comparisons
 See `help expr4` 
 
 ### Core commands
@@ -63,12 +63,16 @@ All the Exit commands with `q` replaced by `w`
 `<tab-index-n>gt` : switch to n'th tab
 
 #### Split Panes
-`:vsplit` : vertical split, opens the same buffer
-`:split` : horizontal split, opens the same buffer
-`:new` : horizontal split, opens new buffer
-`:vnew` : vertical split, opens new buffer
+`:vsplit` : vertical split, opens the same buffer. Accepts file/folder name
+`:split` : horizontal split, opens the same buffer. Accepts file/folder name
+`:new` : horizontal split, opens new buffer. Accepts file/folder name
+`:vnew` : vertical split, opens new buffer. Accepts file/folder name
 `Ctrl + w + Arrow keys` : Navigate between split panes
 `Ctrl + w + <h/j/k/l>`  : Navigate between split panes left/up/down/right
+
+> Resizing panes:<br>
+If you are on gvim, you can just drag the border other wise use `:resize` and `:vertical resize` to resize the split panes.<br>
+Alternatively we can use `<Ctrl-w> +/-` and `<Ctrl-w> </>` for vertical and horizontal resizing. 
 
 #### File Explorer
 People mostly use _nerdtree_ for this purpose but I find VIM's `:Explore` good enough. <br>
@@ -82,7 +86,7 @@ Place this in your .vimrc file to display `Welcome back <hari in some utf-8 char
 
 #### Example vimrc file
 An example .vimrc file is provided with the default VIM installation, 
-We can use it by adding the beow line in your .vimrc file<br>
+We can use it by adding the below line in your .vimrc file<br>
 
 ```vim
 "use the example vimrc file"
@@ -102,6 +106,7 @@ set noundofile
 > Normal : press `<ESC>` key, default mode<br>
 > Insert Mode: press "i"<br>
 > Visual Mode: press "v"<br>
+> Command line Mode: press ":" while in normal mode<br>
 
 #### Locating you VIM installation directory, vimrc
 `:echo $MYVIMRC`  -> vimrc file in use
@@ -110,11 +115,24 @@ set noundofile
 #### List all loaded vim scripts
 `:scriptnames`
 
-#### Seeing recent messages
+#### Seeing recent messages and redirecting messages
 `:messages`
 Here we can see all the messages history.<br>
-While writing vim plugins and editing vimrrc, I find it very useful to output some debug statements.<br>
+While writing vim plugins and editing vimrc, I find it very useful to output some debug statements.<br>
 Using conventional `echo` won't save the messages for future use. Use `echom` for such purposes.
+
+> Copying messages
+We need to redirect them to any of the register<br>
+Example: copy last 5 messages<br>
+```vim
+:redir @"
+:5messages
+:redir END
+```
+Now its in the `"` register and can be pasted using `p`.<br>
+
+We can also redirect it to a file
+`:redir >> vim.log`
 
 #### Custom VIM key mappings
 See `:help map` for more info, Mostly we will need, visual, insert and normal mode mappings
@@ -136,7 +154,7 @@ nnoremap <leader>pw viwpviwy
 ```
 
 #### Vim Abbrevations
-Extemely useful while typing long names
+Extremely useful while typing long names
 `:iabbrev chc chocolate`
 In insert mode when ever we type chc followed by space, vim automatically replaces _chc_ with _chocolate_<br>
 Note the chc must be a separate word. _achc_ won't get replaced with _achocolate_.
@@ -148,6 +166,45 @@ Goes over all the words in all open buffers and list downs all near matches
 #### Go to Other end of bracket
 press `%` while on bracket in normal mode
 
-#### Go to next/previous occurence
-press `n` and `N` to go to next and previous occurence respectively of the search query in normal mode.
+#### Go to next/previous occurrence
+press `n` and `N` to go to next and previous occurrence respectively of the search query in normal mode.
 
+#### Save buffer to file
+`:file <file-name>` followed by `:w`
+
+#### Load a vim plugin
+`source your_plugin.vim` Either put it your vimrc or invoke the command from you current buffer via command line mode to localize the plugin for the current buffer.
+
+#### Open file in current buffer
+`vi <file-name>`
+
+#### Go to top/bottom
+`Ctrl + home` or `gg` : go to top
+`Ctrl + end` or `G` : go to bottom
+
+Useful mapping to select all text
+```vim
+nnoremap <C-a> ggVG
+```
+#### VIM registers
+VIM has 10 types of registers used to store copied/deleted/system clipboard content etc.<br>
+Register content can be pasted to buffer in bot insert and normal mode.<br>
+
+In insert mode use `<Ctrl-r> <register-key>`<br>
+In normal mode use `"<register-key>p`<br>
+
+Mostly we need Unnamed register `"`  which stores the yanked text from the buffer and `+` which stores the system clipboard text.<br>
+
+>System Clipboard Copy/Paste:
+Its often required to copy/paste to system clipboard to copy/paste outside vim<br>
+Copy: `"+y` <br>
+Paste: `"+p` This effectively pastes the content from the register `+` <br>
+
+For more information see `:help registers`<br>
+
+#### VIM spell check
+```vim
+:set spell
+```
+Go to next spelling error : `]s`<br>
+Got to previous spelling error : `[s` <br>
